@@ -4,8 +4,14 @@
  * found in the LICENSE file.
  *
  */
-library tix_navigate;
 
-export 'src/core_navigate.dart';
-export 'src/mixin.dart';
-export 'src/base_route.dart';
+class TixNavigateException with Exception {
+  String name;
+
+  TixNavigateException(this.name);
+
+  @override
+  String toString() {
+    return name ?? 'TixNavigateException';
+  }
+}
