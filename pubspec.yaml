@@ -1,0 +1,21 @@
+name: tix_navigate
+description: A new flutter module project.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  module:
+    androidX: true
+    androidPackage: com.example.tix_navigate
+    iosBundleIdentifier: com.example.tixNavigate

@@ -1,4 +1,4 @@
-# tix_navigate
+# example
 
 A new flutter module project.
 
