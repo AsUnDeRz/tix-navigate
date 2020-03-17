@@ -7,15 +7,19 @@
 import 'package:flutter/material.dart';
 import 'package:tix_navigate/tix_navigate.dart';
 
-class Page2 extends StatefulWidget with BaseRoute {
+class Page2 extends StatefulWidget with TixRoute {
   @override
   _Page2State createState() => _Page2State();
 
   @override
-  String buildPath() => '/page2';
+  String buildPath() {
+    return '/page2';
+  }
 
   @override
-  Route routeTo(data) => MaterialPageRoute(builder: (context) => Page2());
+  Route routeTo(data) {
+    return MaterialPageRoute(builder: (context) => Page2());
+  }
 }
 
 class _Page2State extends State<Page2> with TixNavigateMixin {

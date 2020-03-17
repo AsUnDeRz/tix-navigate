@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 
-mixin BaseRoute {
+mixin TixRoute {
   String buildPath();
   bool clearStack() => false;
   Future<bool> hasPermission(dynamic params) async => true;

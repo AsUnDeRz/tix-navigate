@@ -8,4 +8,4 @@ library tix_navigate;
 
 export 'src/core_navigate.dart';
 export 'src/mixin.dart';
-export 'src/base_route.dart';
+export 'src/tix_route.dart';

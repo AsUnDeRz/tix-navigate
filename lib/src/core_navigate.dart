@@ -6,7 +6,7 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:tix_navigate/src/base_route.dart';
+import 'package:tix_navigate/src/tix_route.dart';
 import 'package:tix_navigate/src/core_route.dart';
 import 'package:tix_navigate/src/exception.dart';
 
@@ -20,7 +20,7 @@ class TixNavigate {
 
   TixNavigate._init();
 
-  void configuration(List<BaseRoute> configRoutes, {GlobalKey<NavigatorState> key}) {
+  void configRoute(List<TixRoute> configRoutes, {GlobalKey<NavigatorState> key}) {
     assert(() {
       if (key == null) {
         navigatorKey = GlobalKey<NavigatorState>();
@@ -41,11 +41,22 @@ class TixNavigate {
     }());
   }
 
+  void configNavigatorKey({GlobalKey<NavigatorState> key}) {
+    assert(() {
+      if (key == null) {
+        navigatorKey = GlobalKey<NavigatorState>();
+      } else {
+        navigatorKey = key;
+      }
+      return true;
+    }());
+  }
+
   Route<dynamic> generator(RouteSettings routeSettings) => coreRouter.generator(routeSettings);
 
   pop({Object data}) => navigatorKey.currentState.pop(data);
 
-  Future<dynamic> navigateTo(BaseRoute route, {Object data, bool clearStack}) async {
+  Future<dynamic> navigateTo(TixRoute route, {Object data, bool clearStack}) async {
     assert(coreRouter.routes.isNotEmpty);
     assert(navigatorKey != null);
     if (coreRouter != null) {

@@ -9,7 +9,7 @@ import 'package:tix_navigate/tix_navigate.dart';
 
 abstract class TixNavigateProvider {
   bool pop({Object data});
-  Future<dynamic> navigateTo(BaseRoute route, {Object data, bool clearStack});
+  Future<dynamic> navigateTo(TixRoute route, {Object data, bool clearStack});
 }
 
 mixin TixNavigateMixin implements TixNavigateProvider {
@@ -19,7 +19,7 @@ mixin TixNavigateMixin implements TixNavigateProvider {
   }
 
   @override
-  Future navigateTo(BaseRoute route, {Object data, bool clearStack}) {
+  Future navigateTo(TixRoute route, {Object data, bool clearStack}) {
     return TixNavigate.instance.navigateTo(route, data: data, clearStack: clearStack);
   }
 }
