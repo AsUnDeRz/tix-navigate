@@ -16,42 +16,28 @@ class TixNavigate {
   static final TixNavigate _singleton = TixNavigate._init();
 
   GlobalKey<NavigatorState> navigatorKey;
-  CoreRouter coreRouter;
+  CoreRouter coreRouter = CoreRouter();
 
-  TixNavigate._init() {
-    coreRouter = CoreRouter();
-  }
+  TixNavigate._init();
 
   void configRoute(List<TixRoute> configRoutes, {GlobalKey<NavigatorState> key}) {
-    assert(() {
-      if (key == null) {
-        navigatorKey = GlobalKey<NavigatorState>();
-      } else {
-        navigatorKey = key;
-      }
-      return true;
-    }());
-    assert(() {
-      if (configRoutes != null && coreRouter != null) {
-        coreRouter.routes.clear();
-        coreRouter.routes.addAll(configRoutes);
-      } else {
-        throw TixNavigateException('config routes is empty and coreRouter == null please init '
-            'instance core navigate ');
-      }
-      return true;
-    }());
+    if (key == null) {
+      navigatorKey = GlobalKey<NavigatorState>();
+    } else {
+      navigatorKey = key;
+    }
+    if (configRoutes != null && coreRouter != null) {
+      coreRouter.routes.clear();
+      coreRouter.routes.addAll(configRoutes);
+    }
   }
 
   void configNavigatorKey({GlobalKey<NavigatorState> key}) {
-    assert(() {
-      if (key == null) {
-        navigatorKey = GlobalKey<NavigatorState>();
-      } else {
-        navigatorKey = key;
-      }
-      return true;
-    }());
+    if (key == null) {
+      navigatorKey = GlobalKey<NavigatorState>();
+    } else {
+      navigatorKey = key;
+    }
   }
 
   Route<dynamic> generator(RouteSettings routeSettings) => coreRouter.generator(routeSettings);

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:example/Page2.dart';
 import 'package:flutter/material.dart';
 import 'package:tix_navigate/tix_navigate.dart';
@@ -8,7 +10,12 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   TixNavigate.instance.configRoute([Page2()], key: navigatorKey);
 
-  runApp(MyApp());
+  runZoned(() => runApp(MyApp()), onError: (error, stackTrace) {
+    try {
+      print(error);
+      print(stackTrace);
+    } catch (e) {}
+  });
 }
 
 class MyApp extends StatelessWidget {
