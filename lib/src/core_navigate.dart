@@ -16,9 +16,11 @@ class TixNavigate {
   static final TixNavigate _singleton = TixNavigate._init();
 
   GlobalKey<NavigatorState> navigatorKey;
-  CoreRouter coreRouter = CoreRouter();
+  CoreRouter coreRouter;
 
-  TixNavigate._init();
+  TixNavigate._init() {
+    coreRouter = CoreRouter();
+  }
 
   void configRoute(List<TixRoute> configRoutes, {GlobalKey<NavigatorState> key}) {
     assert(() {
@@ -60,7 +62,8 @@ class TixNavigate {
     assert(coreRouter.routes.isNotEmpty);
     assert(navigatorKey != null);
     if (coreRouter != null) {
-      final routeMatch = coreRouter.routes.firstWhere((r) => r.buildPath() == route.buildPath());
+      final routeMatch =
+          coreRouter.routes.firstWhere((r) => r.buildPath().contains(route.buildPath()));
       if (routeMatch != null) {
         final hasPermission = await routeMatch.hasPermission(data);
         if (hasPermission) {
