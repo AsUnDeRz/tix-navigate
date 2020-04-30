@@ -10,9 +10,13 @@ import 'package:tix_navigate/src/tix_route.dart';
 
 class CoreRouter {
   final List<TixRoute> routes = [];
+  Function(String) onRoute;
 
   Route<dynamic> generator(RouteSettings settings) {
     final routeMatch = routes.firstWhere((r) => r.buildPath() == settings.name);
+    if (onRoute != null) {
+      onRoute(routeMatch.buildPath());
+    }
     return routeMatch.routeTo(settings.arguments);
   }
 }

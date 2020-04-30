@@ -9,6 +9,9 @@ GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   TixNavigate.instance.configRoute([Page2()], key: navigatorKey);
+  TixNavigate.instance.addObserveRoute((path) {
+    print('observe route to $path');
+  });
 
   runZoned(() => runApp(MyApp()), onError: (error, stackTrace) {
     try {

@@ -20,6 +20,12 @@ class TixNavigate {
 
   TixNavigate._init();
 
+  void addObserveRoute(Function(String) onRouteChange) {
+    if (onRouteChange != null) {
+      coreRouter.onRoute = onRouteChange;
+    }
+  }
+
   void configRoute(List<TixRoute> configRoutes, {GlobalKey<NavigatorState> key}) {
     if (key == null) {
       navigatorKey = GlobalKey<NavigatorState>();
