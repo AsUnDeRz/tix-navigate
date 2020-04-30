@@ -51,11 +51,10 @@ class TixNavigate {
   pop({Object data}) => navigatorKey.currentState.pop(data);
 
   Future<dynamic> navigateTo(TixRoute route, {Object data, bool clearStack}) async {
-    assert(coreRouter.routes.isNotEmpty);
-    assert(navigatorKey != null);
     if (coreRouter != null) {
-      final routeMatch =
-          coreRouter.routes.firstWhere((r) => r.buildPath().contains(route.buildPath()));
+      await checkRoute(route);
+      final routeMatch = coreRouter.routes
+          .firstWhere((r) => r.buildPath().contains(route.buildPath()), orElse: () => null);
       if (routeMatch != null) {
         final hasPermission = await routeMatch.hasPermission(data);
         if (hasPermission) {
@@ -71,5 +70,17 @@ class TixNavigate {
       throw TixNavigateException('config routes is empty and coreRouter == null please init '
           'instance core navigate ');
     }
+  }
+
+  Future<bool> checkRoute(TixRoute route) {
+    final routeMatch = coreRouter.routes
+        .firstWhere((r) => r.buildPath().contains(route.buildPath()), orElse: () => null);
+    if (routeMatch == null) {
+      debugPrint('add ' + route.buildPath() + ' because routeMatch = null');
+      coreRouter.routes.add(route);
+    }
+    debugPrint('size routes ${coreRouter.routes.length}');
+
+    return Future.value();
   }
 }
