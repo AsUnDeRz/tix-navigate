@@ -14,12 +14,12 @@ abstract class TixNavigateProvider {
 
 mixin TixNavigateMixin implements TixNavigateProvider {
   @override
-  bool pop({Object data}) {
+  bool pop({Object? data}) {
     return TixNavigate.instance.pop(data: data);
   }
 
   @override
-  Future navigateTo(TixRoute route, {Object data, bool clearStack}) {
+  Future navigateTo(TixRoute route, {Object? data, bool? clearStack}) {
     return TixNavigate.instance.navigateTo(route, data: data, clearStack: clearStack);
   }
 }

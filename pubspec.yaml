@@ -1,15 +1,16 @@
 name: tix_navigate
 description: A new flutter module project.
-version: 1.0.0+1
+version: 2.0.0+1
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
+  collection: ^1.15.0
 
 dev_dependencies:
   flutter_test:
