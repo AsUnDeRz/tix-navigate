@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:tix_navigate/tix_navigate.dart';
 
 class Page2 extends StatefulWidget with TixRoute {
+  final String? data;
+
+  const Page2({Key? key, this.data}) : super(key: key);
   @override
   _Page2State createState() => _Page2State();
 
@@ -18,7 +21,10 @@ class Page2 extends StatefulWidget with TixRoute {
 
   @override
   Route routeTo(data) {
-    return MaterialPageRoute(builder: (context) => Page2());
+    return MaterialPageRoute(
+        builder: (context) => Page2(
+              data: "$data",
+            ));
   }
 }
 
@@ -28,7 +34,7 @@ class _Page2State extends State<Page2> with TixNavigateMixin {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Text('asdfasd'),
+          child: Text(widget.data ?? ''),
         ),
       ),
     );

@@ -45,13 +45,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TixNavigateMixin {
-  int _counter = 0;
+  int _counter = 10;
 
   void _incrementCounter() {
-    navigateTo(Page2());
-    setState(() {
-      _counter++;
-    });
+    navigateTo(Page2(), data: _counter);
+    // setState(() {
+    //   _counter++;s
+    // });
   }
 
   @override

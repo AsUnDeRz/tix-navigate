@@ -12,6 +12,6 @@ class TixNavigateException with Exception {
 
   @override
   String toString() {
-    return name ?? 'TixNavigateException';
+    return name;
   }
 }

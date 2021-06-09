@@ -82,6 +82,6 @@ class TixNavigate {
     }
     debugPrint('size routes ${coreRouter.routes.length}');
 
-    return Future.value();
+    return Future.value(true);
   }
 }
