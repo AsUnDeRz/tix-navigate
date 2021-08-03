@@ -49,7 +49,16 @@ class TixNavigate {
 
   Route<dynamic> generator(RouteSettings routeSettings) => coreRouter.generator(routeSettings);
 
-  pop({Object? data}) => navigatorKey?.currentState?.pop(data);
+  pop({Object? data}) {
+    final canPop = navigatorKey?.currentState?.canPop() ?? false;
+    if (canPop) {
+      navigatorKey?.currentState?.pop(data);
+    }
+  }
+
+  popWithContext(BuildContext context, {Object? data}) {
+    Navigator.of(context).pop(data);
+  }
 
   Future<dynamic> navigateTo(TixRoute route, {Object? data, bool? clearStack}) async {
     if (coreRouter != null) {
