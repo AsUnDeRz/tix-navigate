@@ -18,6 +18,7 @@ class TixNavigate {
 
   GlobalKey<NavigatorState>? navigatorKey;
   CoreRouter coreRouter = CoreRouter();
+  String? currentPath;
 
   TixNavigate._init();
 
@@ -69,9 +70,11 @@ class TixNavigate {
         final hasPermission = await routeMatch.hasPermission(data);
         if (hasPermission) {
           if (clearStack ?? routeMatch.clearStack()) {
+            currentPath = route.buildPath();
             return await navigatorKey?.currentState
                 ?.pushNamedAndRemoveUntil(route.buildPath(), (check) => false, arguments: data);
           } else {
+            currentPath = route.buildPath();
             return await navigatorKey?.currentState?.pushNamed(route.buildPath(), arguments: data);
           }
         }
