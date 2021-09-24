@@ -18,7 +18,8 @@ class TixNavigate {
 
   GlobalKey<NavigatorState>? navigatorKey;
   CoreRouter coreRouter = CoreRouter();
-  String? currentPath;
+  List<String> stackNavigate = [];
+  String? get currentPath => stackNavigate.lastOrNull;
 
   TixNavigate._init();
 
@@ -51,10 +52,13 @@ class TixNavigate {
   Route<dynamic> generator(RouteSettings routeSettings) => coreRouter.generator(routeSettings);
 
   pop({Object? data}) {
-    final canPop = navigatorKey?.currentState?.canPop() ?? false;
-    if (canPop) {
-      navigatorKey?.currentState?.pop(data);
-    }
+    try {
+      final canPop = navigatorKey?.currentState?.canPop() ?? false;
+      if (canPop) {
+        navigatorKey?.currentState?.pop(data);
+        stackNavigate.removeLast();
+      }
+    } catch (e) {}
   }
 
   popWithContext(BuildContext context, {Object? data}) {
@@ -70,11 +74,12 @@ class TixNavigate {
         final hasPermission = await routeMatch.hasPermission(data);
         if (hasPermission) {
           if (clearStack ?? routeMatch.clearStack()) {
-            currentPath = route.buildPath();
+            stackNavigate.clear();
+            stackNavigate.add(route.buildPath());
             return await navigatorKey?.currentState
                 ?.pushNamedAndRemoveUntil(route.buildPath(), (check) => false, arguments: data);
           } else {
-            currentPath = route.buildPath();
+            stackNavigate.add(route.buildPath());
             return await navigatorKey?.currentState?.pushNamed(route.buildPath(), arguments: data);
           }
         }
