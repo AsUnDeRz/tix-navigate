@@ -4,31 +4,38 @@
  * found in the LICENSE file.
  *
  */
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tix_navigate/tix_navigate.dart';
 
-class Page2 extends StatefulWidget with TixRoute {
+class PageMultiple extends StatefulWidget with TixRoute {
   final String? data;
 
-  const Page2({Key? key, this.data}) : super(key: key);
+  const PageMultiple({Key? key, this.data}) : super(key: key);
   @override
-  _Page2State createState() => _Page2State();
-
-  @override
-  String buildPath() {
-    return '/page2';
-  }
+  _PageMultipleState createState() => _PageMultipleState();
 
   @override
   Route routeTo(data) {
+    return CupertinoPageRoute(
+        builder: (_) => PageMultiple(
+              data: '$data',
+            ));
     return MaterialPageRoute(
-        builder: (context) => Page2(
+        builder: (context) => PageMultiple(
               data: "$data",
             ));
   }
 }
 
-class _Page2State extends State<Page2> with TixNavigateMixin {
+class _PageMultipleState extends State<PageMultiple> with TixNavigateMixin {
+  @override
+  void initState() {
+    // TODO: implement initState
+    print('initState');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

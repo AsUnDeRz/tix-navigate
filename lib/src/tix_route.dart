@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 
 mixin TixRoute {
-  String buildPath();
+  String buildPath() => runtimeType.toString();
   bool clearStack() => false;
   Future<bool> hasPermission(dynamic params) async => true;
   Route<dynamic> routeTo(dynamic data);

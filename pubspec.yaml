@@ -1,6 +1,6 @@
 name: tix_navigate
 description: A new flutter module project.
-version: 2.0.0+1
+version: 3.0.0+1
 publish_to: 'none'
 
 environment:

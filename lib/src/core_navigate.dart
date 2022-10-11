@@ -29,13 +29,14 @@ class TixNavigate {
     }
   }
 
-  void configRoute(List<TixRoute>? configRoutes, {GlobalKey<NavigatorState>? key}) {
+  void configRoute(List<TixRoute>? configRoutes,
+      {GlobalKey<NavigatorState>? key}) {
     if (key == null) {
       navigatorKey = GlobalKey<NavigatorState>();
     } else {
       navigatorKey = key;
     }
-    if (configRoutes != null && coreRouter != null) {
+    if (configRoutes != null) {
       coreRouter.routes.clear();
       coreRouter.routes.addAll(configRoutes);
     }
@@ -49,7 +50,8 @@ class TixNavigate {
     }
   }
 
-  Route<dynamic> generator(RouteSettings routeSettings) => coreRouter.generator(routeSettings);
+  Route<dynamic> generator(RouteSettings routeSettings) =>
+      coreRouter.generator(routeSettings);
 
   pop({Object? data}) {
     try {
@@ -65,34 +67,38 @@ class TixNavigate {
     Navigator.of(context).pop(data);
   }
 
-  Future<dynamic> navigateTo(TixRoute route, {Object? data, bool? clearStack}) async {
+  Future<dynamic> navigateTo(TixRoute route,
+      {Object? data, bool? clearStack}) async {
     if (coreRouter != null) {
       await checkRoute(route);
-      final routeMatch =
-          coreRouter.routes.firstWhereOrNull((r) => r.buildPath().contains(route.buildPath()));
+      final routeMatch = coreRouter.routes
+          .firstWhereOrNull((r) => r.buildPath().contains(route.buildPath()));
       if (routeMatch != null) {
         final hasPermission = await routeMatch.hasPermission(data);
         if (hasPermission) {
           if (clearStack ?? routeMatch.clearStack()) {
             stackNavigate.clear();
             stackNavigate.add(route.buildPath());
-            return await navigatorKey?.currentState
-                ?.pushNamedAndRemoveUntil(route.buildPath(), (check) => false, arguments: data);
+            return await navigatorKey?.currentState?.pushNamedAndRemoveUntil(
+                route.buildPath(), (check) => false,
+                arguments: data);
           } else {
             stackNavigate.add(route.buildPath());
-            return await navigatorKey?.currentState?.pushNamed(route.buildPath(), arguments: data);
+            return await navigatorKey?.currentState
+                ?.pushNamed(route.buildPath(), arguments: data);
           }
         }
       }
     } else {
-      throw TixNavigateException('config routes is empty and coreRouter == null please init '
+      throw TixNavigateException(
+          'config routes is empty and coreRouter == null please init '
           'instance core navigate ');
     }
   }
 
   Future<bool> checkRoute(TixRoute route) {
-    final routeMatch =
-        coreRouter.routes.firstWhereOrNull((r) => r.buildPath().contains(route.buildPath()));
+    final routeMatch = coreRouter.routes
+        .firstWhereOrNull((r) => r.buildPath().contains(route.buildPath()));
     if (routeMatch == null) {
       debugPrint('add ' + route.buildPath() + ' because routeMatch = null');
       coreRouter.routes.add(route);

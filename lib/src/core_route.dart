@@ -15,7 +15,7 @@ class CoreRouter {
   Route<dynamic> generator(RouteSettings settings) {
     final routeMatch = routes.firstWhere((r) => r.buildPath() == settings.name);
     if (onRoute != null) {
-      onRoute!(routeMatch.buildPath());
+      onRoute?.call(routeMatch.buildPath());
     }
     return routeMatch.routeTo(settings.arguments);
   }

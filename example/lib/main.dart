@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:example/Page2.dart';
+import 'package:example/page2.dart';
 import 'package:flutter/material.dart';
 import 'package:tix_navigate/tix_navigate.dart';
 
@@ -13,10 +13,12 @@ void main() {
     print('observe route to $path');
   });
 
-  runZoned(() => runApp(MyApp()), onError: (error, stackTrace) {
+  runZonedGuarded(() {
+    runApp(MyApp());
+  }, (error, stack) {
     try {
       print(error);
-      print(stackTrace);
+      print(stack);
     } catch (e) {}
   });
 }
@@ -48,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> with TixNavigateMixin {
   int _counter = 10;
 
   void _incrementCounter() {
-    navigateTo(Page2(), data: _counter);
+    navigateTo(PageMultiple(), data: _counter);
     // setState(() {
     //   _counter++;s
     // });
@@ -69,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> with TixNavigateMixin {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
           ],
         ),
